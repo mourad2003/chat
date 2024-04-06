@@ -9,13 +9,31 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f3f3f3;
+      background: linear-gradient(45deg, #9404c0, #ec0c04);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    #logo1,
+    #logo2 {
+      width: 100px;
+      height: 100px;
+      margin: 0 10px;
     }
 
     #chat-container {
       max-width: 400px;
-      margin: 20px auto;
-      background-color: #fff;
+      background-color: rgba(255, 255, 255, 0.9);
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       overflow: hidden;
@@ -34,12 +52,13 @@
     }
 
     .user-message {
-      background-color: #d2eaf5;
+      background-color: #FFC107;
       text-align: right;
     }
 
     .chatbot-message {
-      background-color: #b2e672;
+      background-color: #4CAF50;
+      color: white;
     }
 
     #user-input {
@@ -56,13 +75,18 @@
       border: none;
       border-radius: 20px;
       margin: 10px;
-      background-color: #4CAF50;
+      background-color: #FF5722;
       color: white;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
+  <div id="header">
+    <img id="logo1" src="C:\Users\lenovo\Desktop\my work\campus vert\CnFp-1.png" alt="Logo 1" width="100" height="100">
+    <img id="logo2" src="C:\Users\lenovo\Downloads\4c771ee8-72ad-4b98-86d3-f40fe26e1540-removebg-preview.png" alt="Logo 2" width="100" height="100">
+  </div>
+
   <div id="chat-container">
     <div id="chat-log"></div>
     <input type="text" id="user-input" placeholder="Type your message...">
