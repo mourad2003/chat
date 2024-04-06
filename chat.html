@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dev Durable Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f3f3f3;
+    }
+
+    #chat-container {
+      max-width: 400px;
+      margin: 20px auto;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    #chat-log {
+      padding: 10px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .message {
+      padding: 8px 12px;
+      margin: 5px;
+      border-radius: 10px;
+    }
+
+    .user-message {
+      background-color: #d2eaf5;
+      text-align: right;
+    }
+
+    .chatbot-message {
+      background-color: #b2e672;
+    }
+
+    #user-input {
+      width: calc(100% - 70px);
+      padding: 8px;
+      border: none;
+      border-radius: 20px;
+      margin: 10px;
+    }
+
+    #send-button {
+      width: 50px;
+      padding: 8px;
+      border: none;
+      border-radius: 20px;
+      margin: 10px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="chat-container">
+    <div id="chat-log"></div>
+    <input type="text" id="user-input" placeholder="Type your message...">
+    <button id="send-button" onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    const responses = {
+      'what is sustainable development?': 'Sustainable development is development that meets the needs of the present without compromising the ability of future generations to meet their own needs.',
+      'why is sustainable development important?': 'Sustainable development is important because it ensures that we are able to meet the needs of the present without compromising the ability of future generations to meet their own needs.',
+      'what are the three pillars of sustainable development?': 'The three pillars of sustainable development are economic development, social development, and environmental protection.',
+      'how can individuals contribute to sustainable development?': 'Individuals can contribute to sustainable development by reducing their energy consumption, recycling, conserving water, supporting sustainable businesses, and advocating for sustainable policies.',
+      'what are some examples of sustainable practices?': 'Examples of sustainable practices include using renewable energy sources, implementing energy-efficient technologies, reducing waste through recycling and composting, promoting sustainable agriculture, and protecting natural habitats and biodiversity.',
+      'what is the role of businesses in sustainable development?': 'Businesses play a crucial role in sustainable development by adopting environmentally friendly practices, promoting social responsibility, investing in clean technologies, and supporting sustainable supply chains.',
+      'how does sustainable development impact the economy?': 'Sustainable development can have positive impacts on the economy by promoting innovation, creating new job opportunities in green industries, reducing resource scarcity and associated costs, and fostering long-term economic stability.',
+      'what are the benefits of sustainable development?': 'The benefits of sustainable development include improved quality of life, environmental preservation, social equity, economic resilience, and intergenerational equity.',
+      'what are the challenges of achieving sustainable development?': 'Challenges of achieving sustainable development include balancing economic growth with environmental conservation, overcoming resistance to change, addressing social inequality, and coordinating international efforts to address global environmental issues.',
+      'whats your name ?': 'my nameiscampus vert and im member  in cnfp club .',
+      'who made you ?': 'monsieur HAMDI MOURAD ybi3 omra 5 etoile vip .',
+      // Add more question-answer pairs as needed
+    };
+
+    function sendMessage() {
+      const userInput = document.getElementById('user-input').value.toLowerCase();
+      const chatLog = document.getElementById('chat-log');
+
+      let response;
+      if (responses.hasOwnProperty(userInput)) {
+        response = responses[userInput];
+      } else {
+        response = "Sorry, I don't understand. Please ask another question.";
+      }
+
+      chatLog.innerHTML += `<div class="message user-message">${userInput}</div>`;
+      chatLog.innerHTML += `<div class="message chatbot-message">${response}</div>`;
+
+      // Scroll to bottom of chat log
+      chatLog.scrollTop = chatLog.scrollHeight;
+
+      // Clear input field
+      document.getElementById('user-input').value = '';
+    }
+  </script>
+</body>
+</html>
