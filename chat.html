@@ -3,132 +3,202 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dev Durable Chatbot</title>
+  <title>Campus Vert Bot</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(45deg, #9404c0, #ec0c04);
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      background-color: #eef2f5;
+      background-image: url('https://img.freepik.com/photos-gratuite/coucher-soleil-ville_1127-4143.jpg?w=826'); /* Default background image for PC */
+      background-size: cover;
+      background-attachment: fixed;
     }
 
-    #header {
+    @media (max-width: 768px) {
+      body {
+        background-image: url('https://img.freepik.com/photos-gratuite/beau-coup-paysage-vert-dans-ville-san-francisco_181624-1710.jpg?w=360'); /* Background image for phone */
+      }
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 100px auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.377);
+      border: 2px solid #ddd;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgb(0, 0, 0);
+    }
+
+    .message-container {
+      margin-bottom: 10px;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .user-message, .bot-message {
+      border-radius: 20px;
+      padding: 15px;
+      margin: 10px;
+      max-width: 70%;
+    }
+
+    .user-message {
+      background-color: #4CAF50;
+      color: rgb(0, 0, 0);
+      text-align: left;
+      align-self: flex-end;
+    }
+
+    .bot-message {
+      background-color: #4CAF50;
+      color: #000000;
+      text-align: left;
+    }
+
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+    }
+
+    .input-value {
+      padding: 12px;
+      border: none;
+      border-radius: 25px;
+      background-color: #f3f3f3;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    .fa-arrow-right {
+      margin-left: 5px;
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
     }
 
-    #logo1,
-    #logo2 {
+    .logo {
       width: 100px;
-      height: 100px;
-      margin: 0 10px;
+      height: auto;
     }
 
-    #chat-container {
-      max-width: 400px;
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
+    @media (max-width: 768px) {
+      .container {
+        max-width: 90%;
+        margin: 50px auto;
+      }
 
-    #chat-log {
-      padding: 10px;
-      max-height: 300px;
-      overflow-y: auto;
-    }
+      .message-container {
+        align-items: flex-start;
+      }
 
-    .message {
-      padding: 8px 12px;
-      margin: 5px;
-      border-radius: 10px;
-    }
+      .user-message, .bot-message {
+        max-width: 90%;
+      }
 
-    .user-message {
-      background-color: #FFC107;
-      text-align: right;
-    }
+      .input-container {
+        align-items: center;
+      }
 
-    .chatbot-message {
-      background-color: #4CAF50;
-      color: white;
-    }
-
-    #user-input {
-      width: calc(100% - 70px);
-      padding: 8px;
-      border: none;
-      border-radius: 20px;
-      margin: 10px;
-    }
-
-    #send-button {
-      width: 50px;
-      padding: 8px;
-      border: none;
-      border-radius: 20px;
-      margin: 10px;
-      background-color: #FF5722;
-      color: white;
-      cursor: pointer;
+      .btn {
+        margin-top: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <div id="header">
-    <img id="logo1" src="C:\Users\lenovo\Desktop\my work\campus vert\CnFp-1.png" alt="Logo 1" width="100" height="100">
-    <img id="blob:https://web.whatsapp.com/67bb06f3-516c-4842-aeae-7119beee4a17" alt="Logo 2" width="100" height="100">
+  <div class="logo-container">
+    <img src="C:\Users\lenovo\Desktop\my work\campus vert\CnFp-1.png" alt="Logo 1" class="logo">
+    <img src="C:\Users\lenovo\Downloads\4c771ee8-72ad-4b98-86d3-f40fe26e1540-removebg-preview.png" alt="Logo 2" class="logo">
   </div>
 
-  <div id="chat-container">
-    <div id="chat-log"></div>
-    <input type="text" id="user-input" placeholder="Type your message...">
-    <button id="send-button" onclick="sendMessage()">Send</button>
+  <div class="container">
+    <h1 class="title">how can i assist you today</h1>
+
+    <div id="outputDisplay">
+      <!-- Messages will be displayed here -->
+    </div>
+
+    <div class="input-container">
+      <input id="inputValue" class="input-value" type="text" name="search" placeholder="Type your message...">
+      <button id="searchButton" class="btn">Send</button>
+    </div>
+
+    <p id="returnToHome" class="returning">Return to starting page <i class="fa fa-arrow-right" aria-hidden="true"></i></p>
   </div>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
-    const responses = {
-      'what is sustainable development?': 'Sustainable development is development that meets the needs of the present without compromising the ability of future generations to meet their own needs.',
-      'why is sustainable development important?': 'Sustainable development is important because it ensures that we are able to meet the needs of the present without compromising the ability of future generations to meet their own needs.',
-      'what are the three pillars of sustainable development?': 'The three pillars of sustainable development are economic development, social development, and environmental protection.',
-      'how can individuals contribute to sustainable development?': 'Individuals can contribute to sustainable development by reducing their energy consumption, recycling, conserving water, supporting sustainable businesses, and advocating for sustainable policies.',
-      'what are some examples of sustainable practices?': 'Examples of sustainable practices include using renewable energy sources, implementing energy-efficient technologies, reducing waste through recycling and composting, promoting sustainable agriculture, and protecting natural habitats and biodiversity.',
-      'what is the role of businesses in sustainable development?': 'Businesses play a crucial role in sustainable development by adopting environmentally friendly practices, promoting social responsibility, investing in clean technologies, and supporting sustainable supply chains.',
-      'how does sustainable development impact the economy?': 'Sustainable development can have positive impacts on the economy by promoting innovation, creating new job opportunities in green industries, reducing resource scarcity and associated costs, and fostering long-term economic stability.',
-      'what are the benefits of sustainable development?': 'The benefits of sustainable development include improved quality of life, environmental preservation, social equity, economic resilience, and intergenerational equity.',
-      'what are the challenges of achieving sustainable development?': 'Challenges of achieving sustainable development include balancing economic growth with environmental conservation, overcoming resistance to change, addressing social inequality, and coordinating international efforts to address global environmental issues.',
-      'whats your name ?': 'my nameiscampus vert and im member  in cnfp club .',
-      'who made you ?': 'monsieur HAMDI MOURAD ybi3 omra 5 etoile vip .',
-      // Add more question-answer pairs as needed
-    };
+    $(document).ready(function(){
+      var form = $("#searchForm");
+      var inputValue = $("#inputValue");
+      var searchButton = $("#searchButton");
+      var outputDisplay = $("#outputDisplay");
+      var returnToHome = $("#returnToHome");
 
-    function sendMessage() {
-      const userInput = document.getElementById('user-input').value.toLowerCase();
-      const chatLog = document.getElementById('chat-log');
+      searchButton.on("click", function(event){
+        event.preventDefault();
+        event.stopPropagation();
 
-      let response;
-      if (responses.hasOwnProperty(userInput)) {
-        response = responses[userInput];
-      } else {
-        response = "Sorry, I don't understand. Please ask another question.";
+        var userText = inputValue.val().trim();
+        if (userText === '') return;
+
+        appendMessage(userText, true);
+
+        $.ajax({
+          url: "https://en.wikipedia.org/w/api.php",
+          data: {action: "query", format: "json", prop:"revisions", list:"search", srsearch: userText},
+          dataType: "jsonp",
+          headers: {"Api-User-Agent":"Example/1.0"},
+          success: function(data){
+            displaySearchResults(data.query.search);
+          }
+        });
+
+        inputValue.val(''); // Clear input after sending
+      });
+
+      returnToHome.on("click", function(){
+        history.go(0);
+      });
+
+      function displaySearchResults(results) {
+        results.forEach(function(result) {
+          appendMessage(result.title, false, result.snippet);
+        });
       }
 
-      chatLog.innerHTML += `<div class="message user-message">${userInput}</div>`;
-      chatLog.innerHTML += `<div class="message chatbot-message">${response}</div>`;
-
-      // Scroll to bottom of chat log
-      chatLog.scrollTop = chatLog.scrollHeight;
-
-      // Clear input field
-      document.getElementById('user-input').value = '';
-    }
+      function appendMessage(message, isUser, snippet) {
+        var messageClass = isUser ? 'user-message' : 'bot-message';
+        var messageContent = isUser ? message : "<strong>Bot:</strong> " + message + "<br>" + snippet;
+        var messageContainer = "<div class='message-container'><div class='" + messageClass + "'>" + messageContent + "</div></div>";
+        outputDisplay.append(messageContainer);
+      }
+    });
   </script>
 </body>
 </html>
