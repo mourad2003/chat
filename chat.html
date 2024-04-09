@@ -11,7 +11,7 @@
       margin: 0;
       padding: 0;
       background-color: #eef2f5;
-      background-image: url('https://img.freepik.com/photos-gratuite/coucher-soleil-ville_1127-4143.jpg?w=826'); /* Default background image for PC */
+      background-image: url('https://img.freepik.com/photos-premium/rendering-dessine-paysage-vert-ville-arriere-plan-isole-image-generee-par-ia_905368-4300.jpg?w=996'); /* Default background image for PC */
       background-size: cover;
       background-attachment: fixed;
     }
@@ -26,10 +26,12 @@
       max-width: 600px;
       margin: 100px auto;
       padding: 20px;
-      background-color: rgba(255, 255, 255, 0.377);
-      border: 2px solid #ddd;
+      background-color: rgba(255, 255, 255, 0);
+      border: 2px solid #5835f300;
       border-radius: 20px;
-      box-shadow: 0 5px 15px rgb(0, 0, 0);
+      box-shadow: 0 5px 15px rgb(57, 255, 50);
+      background-image: url('https://img.freepik.com/photos-gratuite/ombres-naturelles-abstraites_23-2149054715.jpg?w=360'); /* Add your background image URL here */
+      background-size: cover;
     }
 
     .message-container {
@@ -41,21 +43,21 @@
 
     .user-message, .bot-message {
       border-radius: 20px;
-      padding: 15px;
+      padding: 10px;
       margin: 10px;
-      max-width: 70%;
+      max-width: fit-content;
+      font-size: 16px;
     }
 
     .user-message {
       background-color: #4CAF50;
-      color: rgb(0, 0, 0);
-      text-align: left;
-      align-self: flex-end;
+      color: white;
+      text-align: right;
     }
 
     .bot-message {
-      background-color: #4CAF50;
-      color: #000000;
+      background-color: #0084ff;
+      color: white;
       text-align: left;
     }
 
@@ -117,7 +119,7 @@
       }
 
       .user-message, .bot-message {
-        max-width: 90%;
+        max-width: fit-content;
       }
 
       .input-container {
@@ -137,7 +139,7 @@
   </div>
 
   <div class="container">
-    <h1 class="title">how can i assist you today</h1>
+    <h1 class="title">How can I assist you today?</h1>
 
     <div id="outputDisplay">
       <!-- Messages will be displayed here -->
@@ -154,11 +156,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
     $(document).ready(function(){
-      var form = $("#searchForm");
       var inputValue = $("#inputValue");
       var searchButton = $("#searchButton");
       var outputDisplay = $("#outputDisplay");
-      var returnToHome = $("#returnToHome");
 
       searchButton.on("click", function(event){
         event.preventDefault();
@@ -169,33 +169,35 @@
 
         appendMessage(userText, true);
 
-        $.ajax({
-          url: "https://en.wikipedia.org/w/api.php",
-          data: {action: "query", format: "json", prop:"revisions", list:"search", srsearch: userText},
-          dataType: "jsonp",
-          headers: {"Api-User-Agent":"Example/1.0"},
-          success: function(data){
-            displaySearchResults(data.query.search);
-          }
-        });
+        // Simulate bot response delay
+        setTimeout(function() {
+          // Call Wikipedia API
+          $.ajax({
+            url: "https://en.wikipedia.org/w/api.php",
+            data: {action: "query", format: "json", prop:"revisions", list:"search", srsearch: userText},
+            dataType: "jsonp",
+            headers: {"Api-User-Agent":"Example/1.0"},
+            success: function(data){
+              var response = "";
+              if (data.query.search.length > 0) {
+                response = data.query.search[0].snippet;
+              } else {
+                response = "Sorry, I couldn't find any relevant information.";
+              }
+              appendMessage(response, false); // Append bot response
+            },
+            error: function() {
+              appendMessage("I'm sorry, I couldn't process your request at the moment.", false);
+            }
+          });
+        }, 1000);
 
         inputValue.val(''); // Clear input after sending
       });
 
-      returnToHome.on("click", function(){
-        history.go(0);
-      });
-
-      function displaySearchResults(results) {
-        results.forEach(function(result) {
-          appendMessage(result.title, false, result.snippet);
-        });
-      }
-
-      function appendMessage(message, isUser, snippet) {
+      function appendMessage(message, isUser) {
         var messageClass = isUser ? 'user-message' : 'bot-message';
-        var messageContent = isUser ? message : "<strong>Bot:</strong> " + message + "<br>" + snippet;
-        var messageContainer = "<div class='message-container'><div class='" + messageClass + "'>" + messageContent + "</div></div>";
+        var messageContainer = "<div class='" + messageClass + "'>" + message + "</div>";
         outputDisplay.append(messageContainer);
       }
     });
