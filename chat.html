@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Changed font */
       margin: 0;
       padding: 0;
       background-color: #eef2f5;
@@ -26,12 +26,14 @@
       max-width: 600px;
       margin: 100px auto;
       padding: 20px;
-      background-color: rgba(255, 255, 255, 0);
-      border: 2px solid #5835f300;
-      border-radius: 20px;
-      box-shadow: 0 5px 15px rgb(57, 255, 50);
-      background-image: url('https://img.freepik.com/photos-gratuite/ombres-naturelles-abstraites_23-2149054715.jpg?w=360'); /* Add your background image URL here */
+      background-color: rgba(255, 255, 255, 0.9); /* Lightened chatbox background */
+      background-image: url('https://img.freepik.com/photos-gratuite/feuilles-naturelles-fond-blanc_23-2148163008.jpg?w=360'); /* Add your image URL here */
       background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      border: 2px solid #ddd;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgb(0, 0, 0);
     }
 
     .message-container {
@@ -43,10 +45,10 @@
 
     .user-message, .bot-message {
       border-radius: 20px;
-      padding: 10px;
+      padding: 10px; /* Reduced padding */
       margin: 10px;
-      max-width: fit-content;
-      font-size: 16px;
+      max-width: max-content; /* Set max-width to fit the content */
+      font-size: 16px; /* Changed font size */
     }
 
     .user-message {
@@ -119,7 +121,7 @@
       }
 
       .user-message, .bot-message {
-        max-width: fit-content;
+        max-width: max-content;
       }
 
       .input-container {
@@ -160,6 +162,9 @@
       var searchButton = $("#searchButton");
       var outputDisplay = $("#outputDisplay");
 
+      // Counter to keep track of the number of specific questions asked
+      var specificQuestionCount = 0;
+
       searchButton.on("click", function(event){
         event.preventDefault();
         event.stopPropagation();
@@ -169,12 +174,50 @@
 
         appendMessage(userText, true);
 
+        // Check if the user's question is one of the specific questions
+        if (isSpecificQuestion(userText)) {
+          handleSpecificQuestion(userText);
+        } else {
+          // Query Wikipedia API for other questions
+          queryWikipedia(userText);
+        }
+
+        inputValue.val(''); // Clear input after sending
+      });
+
+      // Function to check if the user's question is one of the specific questions
+      function isSpecificQuestion(question) {
+        var specificQuestions = ["who are you", "who made you", "what is your function"];
+        return specificQuestions.includes(question.toLowerCase());
+      }
+
+      // Function to handle the specific questions manually
+      function handleSpecificQuestion(question) {
+        var response;
+        switch (question.toLowerCase()) {
+          case "who are you":
+            response = "I am a virtual assistant designed to help you with your inquiries.";
+            break;
+          case "who made you":
+            response = "I was created by mr HAMDI MOURAD.";
+            break;
+          case "what is your function":
+            response = "My function is to provide information and assistance based on your queries.";
+            break;
+          default:
+            response = "Sorry, I couldn't process your request at the moment.";
+            break;
+        }
+        appendMessage(response, false);
+      }
+
+      // Function to query Wikipedia API for other questions
+      function queryWikipedia(question) {
         // Simulate bot response delay
         setTimeout(function() {
-          // Call Wikipedia API
           $.ajax({
             url: "https://en.wikipedia.org/w/api.php",
-            data: {action: "query", format: "json", prop:"revisions", list:"search", srsearch: userText},
+            data: {action: "query", format: "json", prop:"revisions", list:"search", srsearch: question},
             dataType: "jsonp",
             headers: {"Api-User-Agent":"Example/1.0"},
             success: function(data){
@@ -191,10 +234,9 @@
             }
           });
         }, 1000);
+      }
 
-        inputValue.val(''); // Clear input after sending
-      });
-
+      // Function to append message to the chat
       function appendMessage(message, isUser) {
         var messageClass = isUser ? 'user-message' : 'bot-message';
         var messageContainer = "<div class='" + messageClass + "'>" + message + "</div>";
