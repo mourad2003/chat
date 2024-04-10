@@ -14,7 +14,7 @@ app.post('/login', (req, res) => {
   client.messages
     .create({
       body: `New login:\nName: ${name}\nEmail: ${email}`,
-      from: '+213797756982',
+      from: '(334) 453-4154',
       to: '+213797756982'
     })
     .then(message => console.log(`WhatsApp message sent: ${message.sid}`))
