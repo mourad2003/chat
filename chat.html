@@ -7,18 +7,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Changed font */
+      font-family: 'Roboto', Arial, sans-serif;
       margin: 0;
       padding: 0;
       background-color: #eef2f5;
-      background-image: url('https://img.freepik.com/photos-premium/rendering-dessine-paysage-vert-ville-arriere-plan-isole-image-generee-par-ia_905368-4300.jpg?w=996'); /* Default background image for PC */
-      background-size: cover;
-      background-attachment: fixed;
     }
 
     @media (max-width: 768px) {
       body {
-        background-image: url('https://img.freepik.com/photos-gratuite/beau-coup-paysage-vert-dans-ville-san-francisco_181624-1710.jpg?w=360'); /* Background image for phone */
+        background-image: url('https://i.pinimg.com/564x/be/0c/2f/be0c2f49aa0cb982db5f5901da20423d.jpg');
       }
     }
 
@@ -26,14 +23,16 @@
       max-width: 600px;
       margin: 100px auto;
       padding: 20px;
-      background-color: rgba(255, 255, 255, 0.9); /* Lightened chatbox background */
-      background-image: url('https://img.freepik.com/photos-gratuite/feuilles-naturelles-fond-blanc_23-2148163008.jpg?w=360'); /* Add your image URL here */
+      background-color: rgb(255, 255, 255);
+      background-image: url('https://i.pinimg.com/564x/ed/6c/d3/ed6cd39c165cb8873477e572cbee8ff7.jpg');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
       border: 2px solid #ddd;
       border-radius: 20px;
-      box-shadow: 0 5px 15px rgb(0, 0, 0);
+      box-shadow: 0 5px 15px rgb(0, 255, 179);
+      transition: opacity 1s ease; 
+      display: none; 
     }
 
     .message-container {
@@ -45,10 +44,10 @@
 
     .user-message, .bot-message {
       border-radius: 20px;
-      padding: 10px; /* Reduced padding */
+      padding: 10px;
       margin: 10px;
-      max-width: max-content; /* Set max-width to fit the content */
-      font-size: 16px; /* Changed font size */
+      max-width: max-content;
+      font-size: 16px;
     }
 
     .user-message {
@@ -110,37 +109,118 @@
       height: auto;
     }
 
-    @media (max-width: 768px) {
-      .container {
-        max-width: 90%;
-        margin: 50px auto;
-      }
+    .contact-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #0084ff;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      transition: opacity 1s ease;
+      opacity: 0;
+      font-size: 18px;
+    }
 
-      .message-container {
-        align-items: flex-start;
-      }
+    .contact-footer p {
+      margin: 0;
+    }
 
-      .user-message, .bot-message {
-        max-width: max-content;
-      }
+    .contact-footer:hover {
+      opacity: 1;
+    }
 
-      .input-container {
-        align-items: center;
-      }
+    /* Social Media Icons */
+    .social-media-icons {
+      margin-top: 10px;
+    }
 
-      .btn {
-        margin-top: 20px;
-      }
+    .social-media-icons a {
+      color: white;
+      font-size: 24px;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .social-media-icons a:hover {
+      color: #45a049;
+    }
+
+    /* Login Page Styles */
+    .login-container {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 20px;
+      background-color: rgb(255, 255, 255);
+      background-image: url('https://i.pinimg.com/564x/ed/6c/d3/ed6cd39c165cb8873477e572cbee8ff7.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      border: 2px solid #ddd;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgb(0, 255, 179);
+      transition: opacity 1s ease;
+    }
+
+    .login-container h1 {
+      text-align: center;
+    }
+
+    .login-input {
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 25px;
+      background-color: #f3f3f3;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .login-btn {
+      margin-top: 20px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-btn:hover {
+      background-color: #45a049;
+    }
+
+    .hidden {
+      opacity: 0;
     }
   </style>
 </head>
 <body>
-  <div class="logo-container">
-    <img src="4c771ee8-72ad-4b98-86d3-f40fe26e1540-removebg-preview.png" alt="Logo 1" class="logo">
-    <img src="CnFp-1.png" alt="Logo 2" class="logo">
+  <!-- Login Page -->
+  <div id="loginPage" class="login-container">
+    <h1>Login</h1>
+    <div class="logo-container">
+      <img src="CnFp-1.png" alt="Logo 1" class="logo">
+      <img src="4c771ee8-72ad-4b98-86d3-f40fe26e1540-removebg-preview.png" alt="Logo 2" class="logo">
+    </div>
+    <form id="loginForm">
+      <input class="login-input" type="text" id="fullName" placeholder="Full Name" required>
+      <input class="login-input" type="email" id="email" placeholder="Email Address" required>
+      <button type="submit" class="login-btn">Login</button>
+    </form>
   </div>
 
-  <div class="container">
+  <!-- Chatbot Page -->
+  <div id="chatbotPage" class="container">
+    <div class="logo-container">
+      <img src="CnFp-1.png" alt="Logo 1" class="logo">
+      <img src="4c771ee8-72ad-4b98-86d3-f40fe26e1540-removebg-preview.png" alt="Logo 2" class="logo">
+    </div>
+
     <h1 class="title">How can I assist you today?</h1>
 
     <div id="outputDisplay">
@@ -152,12 +232,53 @@
       <button id="searchButton" class="btn">Send</button>
     </div>
 
-    <p id="returnToHome" class="returning">Return to starting page <i class="fa fa-arrow-right" aria-hidden="true"></i></p>
+    <p id="disconnectBtn" class="disconnect-btn">Disconnect</p>
+    <p id="clearConversation" class="clear-conversation-btn">Clear conversation</p>
+  </div>
+
+  <!-- Contact Footer -->
+  <div class="contact-footer">
+    <p>Contact Us: example@example.com | Phone: 123-456-7890</p>
+    <div class="social-media-icons">
+      <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwju4dDZtbaFAxUm2wIHHRGrDXAQFnoECCEQAQ&url=https%3A%2F%2Fwww.instagram.com%2Fclubcnfporan%2F&usg=AOvVaw3wUgBD3QTYoTOqg2Lbgyqq&opi=89978449" class="fab fa-instagram"></a>
+      <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwju4dDZtbaFAxUm2wIHHRGrDXAQFnoECBkQAQ&url=https%3A%2F%2Fwww.facebook.com%2FClubNFP%2F&usg=AOvVaw3luHzQVeaECIsjO5KsexR-&opi=89978449" class="fab fa-facebook"></a>
+      <a href="#" class="fab fa-youtube"></a>
+    </div>
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
     $(document).ready(function(){
+      // Disconnect button functionality
+      $("#disconnectBtn").click(function() {
+        // Show login page with transition
+        $("#chatbotPage").hide();
+        $("#loginPage").removeClass("hidden");
+        $("#loginPage").show();
+      });
+
+      // Clear conversation button functionality
+      $("#clearConversation").click(function() {
+        $("#outputDisplay").empty(); // Clear conversation history
+      });
+
+      // Login form submission
+      $("#loginForm").submit(function(event) {
+        event.preventDefault();
+
+        // Hide login page with transition
+        $("#loginPage").addClass("hidden");
+        setTimeout(function() {
+          $("#loginPage").hide();
+        }, 1000);
+
+        // Show chatbot page with transition
+        setTimeout(function() {
+          $("#chatbotPage").fadeIn();
+          $(".contact-footer").css("opacity", "1"); // Show footer
+        }, 1000);
+      });
+
       var inputValue = $("#inputValue");
       var searchButton = $("#searchButton");
       var outputDisplay = $("#outputDisplay");
