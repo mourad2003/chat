@@ -9,7 +9,7 @@ const port = 3000;
 // Configuration for Google Sheets API
 const credentials = require('./path/to/your/credentials.json');
 const scopes = ['https://www.googleapis.com/auth/spreadsheets'];
-const spreadsheetId = 'https://docs.google.com/spreadsheets/d/1-EGt-hxlXQWZRvdvxQxN_UT8QDtjeULgetNos7uq5FQ/edit?usp=sharing';
+const spreadsheetId = 'https://docs.google.com/spreadsheets/d/1-EGt-hxlXQWZRvdvxQxN_UT8QDtjeULgetNos7uq5FQ/edit#gid=0';
 const range = 'Sheet1';
 
 // Configuration for email service (Gmail)
