@@ -2,24 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <!-- Link to external CSS file -->
   <link rel="stylesheet" href="chatbot.js">
+ 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Campus Vert Bot</title>
+  <!-- Link to Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
+    /* General styles for the body */
     body {
-      font-family: 'Roboto', Arial, sans-serif;
+      font-family: 'Times New Roman', Times, serif;
       margin: 0;
       padding: 0;
       background-color: #eef2f5;
     }
 
-    @media (max-width: 768px) {
+    /* Background image for PC users */
+    @media (min-width: 769px) {
       body {
-        background-image: url('https://i.pinimg.com/564x/be/0c/2f/be0c2f49aa0cb982db5f5901da20423d.jpg');
+        background-image: url('https://images.pexels.com/photos/917494/pexels-photo-917494.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center ;
       }
     }
 
+    /* Container styles */
     .container {
       max-width: 600px;
       margin: 100px auto;
@@ -36,6 +45,7 @@
       display: none; 
     }
 
+    /* Message container styles */
     .message-container {
       margin-bottom: 10px;
       display: flex;
@@ -43,6 +53,7 @@
       align-items: flex-start;
     }
 
+    /* User and bot message styles */
     .user-message, .bot-message {
       border-radius: 20px;
       padding: 10px;
@@ -51,24 +62,28 @@
       font-size: 16px;
     }
 
+    /* User message styles */
     .user-message {
       background-color: #4CAF50;
       color: white;
       text-align: right;
     }
 
+    /* Bot message styles */
     .bot-message {
-      background-color: #0084ff;
+      background-color: #1535eb;
       color: white;
       text-align: left;
     }
 
+    /* Input container styles */
     .input-container {
       display: flex;
       flex-direction: column;
       margin-top: 20px;
     }
 
+    /* Input value styles */
     .input-value {
       padding: 12px;
       border: none;
@@ -78,6 +93,7 @@
       outline: none;
     }
 
+    /* Button styles */
     .btn {
       padding: 12px 20px;
       border: none;
@@ -90,14 +106,17 @@
       transition: background-color 0.3s ease;
     }
 
+    /* Button hover styles */
     .btn:hover {
       background-color: #45a049;
     }
 
+    /* Arrow icon styles */
     .fa-arrow-right {
       margin-left: 5px;
     }
 
+    /* Logo container styles */
     .logo-container {
       display: flex;
       justify-content: space-between;
@@ -105,11 +124,13 @@
       margin-bottom: 20px;
     }
 
+    /* Logo styles */
     .logo {
       width: 100px;
       height: auto;
     }
 
+    /* Contact footer styles */
     .contact-footer {
       position: fixed;
       bottom: 0;
@@ -124,19 +145,22 @@
       font-size: 18px;
     }
 
+    /* Contact footer paragraph styles */
     .contact-footer p {
       margin: 0;
     }
 
+    /* Contact footer hover styles */
     .contact-footer:hover {
       opacity: 1;
     }
 
-    /* Social Media Icons */
+    /* Social media icons styles */
     .social-media-icons {
       margin-top: 10px;
     }
 
+    /* Social media icon styles */
     .social-media-icons a {
       color: white;
       font-size: 24px;
@@ -145,11 +169,12 @@
       transition: color 0.3s ease;
     }
 
+    /* Social media icon hover styles */
     .social-media-icons a:hover {
       color: #45a049;
     }
 
-    /* Login Page Styles */
+    /* Login container styles */
     .login-container {
       max-width: 400px;
       margin: 100px auto;
@@ -165,10 +190,12 @@
       transition: opacity 1s ease;
     }
 
+    /* Login container heading styles */
     .login-container h1 {
       text-align: center;
     }
 
+    /* Login input styles */
     .login-input {
       margin: 10px 0;
       padding: 12px;
@@ -179,6 +206,7 @@
       outline: none;
     }
 
+    /* Login button styles */
     .login-btn {
       margin-top: 20px;
       padding: 12px 20px;
@@ -191,10 +219,12 @@
       transition: background-color 0.3s ease;
     }
 
+    /* Login button hover styles */
     .login-btn:hover {
       background-color: #45a049;
     }
 
+    /* Hidden styles */
     .hidden {
       opacity: 0;
     }
@@ -204,10 +234,12 @@
   <!-- Login Page -->
   <div id="loginPage" class="login-container">
     <h1>Login</h1>
+    <!-- Logo container -->
     <div class="logo-container">
       <img src="CnFp-1.png" alt="Logo 1" class="logo">
       <img src="4c771ee8-72ad-4b98-86d3-f40fe26e1540-removebg-preview.png" alt="Logo 2" class="logo">
     </div>
+    <!-- Login form -->
     <form id="loginForm">
       <input class="login-input" type="text" id="fullName" placeholder="Full Name" required>
       <input class="login-input" type="email" id="email" placeholder="Email Address" required>
@@ -217,36 +249,44 @@
 
   <!-- Chatbot Page -->
   <div id="chatbotPage" class="container">
+    <!-- Logo container -->
     <div class="logo-container">
       <img src="CnFp-1.png" alt="Logo 1" class="logo">
       <img src="4c771ee8-72ad-4b98-86d3-f40fe26e1540-removebg-preview.png" alt="Logo 2" class="logo">
     </div>
 
+    <!-- Title -->
     <h1 class="title">How can I assist you today?</h1>
 
+    <!-- Output display -->
     <div id="outputDisplay">
       <!-- Messages will be displayed here -->
     </div>
 
+    <!-- Input container -->
     <div class="input-container">
       <input id="inputValue" class="input-value" type="text" name="search" placeholder="Type your message...">
       <button id="searchButton" class="btn">Send</button>
     </div>
 
+    <!-- Disconnect button -->
     <p id="disconnectBtn" class="disconnect-btn">Disconnect</p>
+    <!-- Clear conversation button -->
     <p id="clearConversation" class="clear-conversation-btn">Clear conversation</p>
   </div>
 
   <!-- Contact Footer -->
   <div class="contact-footer">
     <p>Contact Us: clubnfporan@gmail.com | Phone: 0797756982</p>
+    <!-- Social media icons -->
     <div class="social-media-icons">
-      <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwju4dDZtbaFAxUm2wIHHRGrDXAQFnoECCEQAQ&url=https%3A%2F%2Fwww.instagram.com%2Fclubcnfporan%2F&usg=AOvVaw3wUgBD3QTYoTOqg2Lbgyqq&opi=89978449" class="fab fa-instagram"></a>
-      <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwju4dDZtbaFAxUm2wIHHRGrDXAQFnoECBkQAQ&url=https%3A%2F%2Fwww.facebook.com%2FClubNFP%2F&usg=AOvVaw3luHzQVeaECIsjO5KsexR-&opi=89978449" class="fab fa-facebook"></a>
-      <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjQs4a2traFAxW6xQIHHZ5yB5I4ChAWegQICRAB&url=https%3A%2F%2Fwww.youtube.com%2Fchannel%2FUCdmb6LzLr0ooQ_jCPdyD77g&usg=AOvVaw3DeXYozUCFCcujlLye61xL&opi=89978449" class="fab fa-youtube"></a>
+      <a href="https://www.instagram.com/clubcnfporan/" class="fab fa-instagram"></a>
+      <a href="https://www.facebook.com/ClubNFP/" class="fab fa-facebook"></a>
+      <a href="https://www.youtube.com/channel/UCdmb6LzLr0ooQ_jCPdyD77g" class="fab fa-youtube"></a>
     </div>
   </div>
 
+  <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
     $(document).ready(function(){
@@ -364,6 +404,43 @@
         var messageContainer = "<div class='" + messageClass + "'>" + message + "</div>";
         outputDisplay.append(messageContainer);
       }
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Function to send POST request to backend.php
+      function sendRequest(data) {
+        fetch('Untitled-1.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Handle response from backend if needed
+          console.log('Response from backend:', data);
+        })
+        .catch(error => {
+          console.error('There was a problem with the fetch operation:', error);
+        });
+      }
+
+      // Example usage:
+      // Replace this with your actual data to be sent to the backend
+      const requestData = {
+        username: 'example_user',
+        message: 'Hello, backend!'
+      };
+
+      // Send the request when the page loads or whenever appropriate
+      sendRequest(requestData);
     });
   </script>
 </body>
